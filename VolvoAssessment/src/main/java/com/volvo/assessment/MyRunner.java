@@ -10,20 +10,15 @@ import org.springframework.stereotype.Component;
 
 import com.volvo.assessment.model.Address;
 import com.volvo.assessment.model.Customer;
-import com.volvo.assessment.model.User;
 import com.volvo.assessment.repository.AddressRepository;
 import com.volvo.assessment.repository.CustomerRepository;
-import com.volvo.assessment.repository.UserRepository;
 
 @Component
 public class MyRunner implements CommandLineRunner {
 
     private static final Logger logger = LoggerFactory.getLogger(MyRunner.class);
 
-    @Autowired
-    private UserRepository userRepository;
-    
-    @Autowired
+     @Autowired
     private AddressRepository addressRepository;
     
     @Autowired
@@ -33,18 +28,7 @@ public class MyRunner implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-
-        logger.info("initializing users");
-
-        var u1 = new User("Paul", "Smith", "paul.smith@gmail.com");
-        userRepository.save(u1);
-
-        var u2 = new User("Robert", "Black", "rb34@gmail.com");
-        userRepository.save(u2);
-
-        var u3 = new User("John", "Doe", "jdoe@gmail.com");
-        userRepository.save(u3);
-        
+    
         logger.info("initializing Address");
         
         var add1 = new Address("81130220", 10);
@@ -63,16 +47,7 @@ public class MyRunner implements CommandLineRunner {
         cust2.getAddresses().add(add2);
         cust2.getAddresses().add(add3);
         cust2 = customerRepository.save(cust2);
-        /*
-        var ca = new CustomerAddress(cust1, add1);
-        ca = customerAddressRepository.save(ca);
-        ca = new CustomerAddress(cust1, add2);
-        customerAddressRepository.save(ca);
-        ca = new CustomerAddress(cust2, add2);
-        customerAddressRepository.save(ca);
-        ca = new CustomerAddress(cust2, add3);
-        customerAddressRepository.save(ca);
-        */
+      
         
     }
 }
